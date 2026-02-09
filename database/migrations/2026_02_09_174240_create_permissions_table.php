@@ -1,0 +1,30 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('mst_permission', function (Blueprint $table) {
+            $table->id();
+            $table->string('permission_name', 100)->comment('Human readable permission name');
+            $table->boolean('is_active')->default(1)->comment('0=Inactive, 1=Active');
+            $table->timestamps();
+            $table->index(['permission_name']);
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('mst_permission');
+    }
+};
